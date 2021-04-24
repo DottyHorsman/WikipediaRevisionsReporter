@@ -10,8 +10,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.joining;
 
 public final class WikipediaAnalyzer extends VBox {
 
@@ -63,13 +68,10 @@ public final class WikipediaAnalyzer extends VBox {
         try {
             QueryResponse response = engine.queryRevisions(articleTitle);
             //removed RevisionFormatter formatter = new RevisionFormatter();
-            StringBuilder stringBuilder = new StringBuilder();
-            for (Revision revision : response.revisions()) {
-                String message = formatter.format(revision);
-                stringBuilder.append(message);
-                stringBuilder.append("\n");
-            }
-            outputArea.setText(stringBuilder.toString());
+
+            //Stream<Revision> revisionStream = response.revisions().stream().map(str -> formatter.format(str) + "\n").collect(Collectors.joining()));
+            //response.revisions().stream().forEach(System.out::println)            forEach(r -> System.out.println(r)
+            outputArea.setText(response.revisions().stream().map(str -> formatter.format(str) + "\n").collect(Collectors.joining()));
         } catch (IOException e) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Connection Problem");
