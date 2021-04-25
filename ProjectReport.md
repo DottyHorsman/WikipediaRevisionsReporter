@@ -1,48 +1,58 @@
 # Project Report
-
 Dotty Horsman
 
-## Markdown Tips
-
-If you are unfamiliar with MarkDown, check out 
-[the official documentation](https://guides.github.com/features/mastering-markdown/).
-
-Note that IntelliJ IDEA has a Markdown preview that you can access in 
-the upper-right of the editor. Also, since Markdown documents&mdash;like
-source code&mdash;should be human-readable, make sure you keep your lines
-short, as you can see I have done in my Markdown files.
-
-Please remove this subsection before submitting your report. 
-
 ## Challenge #1 Complete
-
-(Explain your solution to Challenge #1. If it is not complete, change
-the subsection title above to "Incomplete" and explain how far you got
-and where you got stuck.)
+This challenge only required one line of code in QueryEngineModule 
+to be slightly changed. Now the Guice config uses WikipediaQueryEngine
+instead of FakeQueryEngine.
 
 ## Challenge #2 Complete
+In this challenge, I added the same design pattern shown in the 
+Query classes to the RevisionFormatter classes which included:  
 
-(Explain your solution to Challenge #2. If it is not complete, change
-the subsection title above to "Incomplete" and explain how far you got
-and where you got stuck.)
+creating these classes
+- RevisionFormatterModule
+- RevisionFormatterInterface
+
+and editing these classes to comply with the new code
+- App
+- RevisionFormatter
+- WikipediaAnalyzer
+
+Subsequently, I made the BetterRevisionFormatter class to format the 
+revisions to be more readable. It might be a little long, but I think it looks nice.
+
+Old Version Example
+- At 2013-05-19T20:53:42Z, a change by Bossanoven
+
+My Version Example
+- On Sunday, May 19, 2013 at 8:53 PM (42 secs): a change by Bossanoven
+
 
 ## Challenge #3 Complete
+In this challenge, I replaced the for-loop responsible for appending each 
+revision to the textarea in WikipediaAnalyzer with a stream() call
+using map() and collect() as well. Initially, I thought a Stream<Revision> 
+object with a toString method would be needed to be accepted by 
+outputArea.setText(). However, I ended up combining the stream() call 
+with outputArea.setText() to fit in one line.
 
-(Explain your solution to Challenge #3. If it is not complete, change
-the subsection title above to "Incomplete" and explain how far you got
-and where you got stuck.)
 
 ## Reflection Question #1: Functional vs OO
-
-(Write one or more paragraphs comparing and contrasting the iterative and functional  
-approaches to string concatenation you explored in challenge #3. Which do you
-prefer, and why?)
+When it comes to string concatenations (like the ones in challenge 3), I mainly prefer 
+iterative approaches. I am a lot less familiar with functional approaches than I am with OO
+as opposed to functional ones purely because I am more familiar with them. I recognize that 
+functional is better usually the better option in the long-run with larger programs, so 
+that they have a better overall performance. I just have a hard time with the syntax of 
+after working with OO structures that are normally less efficient. 
 
 ## Reflection Question #2: Polymorphism and Dependency Inversion
+The RevisionFormatter and QueryEngine classes use Polymorphism with the 
+respective interfaces that they implement. This engendered 
+dependency inversion by keeping the ties between these classes abstract. 
+After the design model of dependency was set in place, these classes could 
+potentially be replaced with any similar kind of class without affecting
+the rest of the program (much like how RevisionFormatter was replaced by
+BetterRevisionFormatter) which is the core of dependency inversion.
 
-(Explain how polymorphism engendered dependency inversion in this little
-application. Be clear and precise here, as this is, in part, an assessment of
-your correct use of technical terminology.
-Consider, for example, where exactly is polymorphism used?
-Where exactly is a dependency inverted?)
 

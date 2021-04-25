@@ -67,10 +67,6 @@ public final class WikipediaAnalyzer extends VBox {
     private void runQuery(String articleTitle) {
         try {
             QueryResponse response = engine.queryRevisions(articleTitle);
-            //removed RevisionFormatter formatter = new RevisionFormatter();
-
-            //Stream<Revision> revisionStream = response.revisions().stream().map(str -> formatter.format(str) + "\n").collect(Collectors.joining()));
-            //response.revisions().stream().forEach(System.out::println)            forEach(r -> System.out.println(r)
             outputArea.setText(response.revisions().stream().map(str -> formatter.format(str) + "\n").collect(Collectors.joining()));
         } catch (IOException e) {
             Alert alert = new Alert(Alert.AlertType.WARNING);

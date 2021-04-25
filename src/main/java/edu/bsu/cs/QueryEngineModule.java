@@ -11,7 +11,7 @@ public class QueryEngineModule extends AbstractModule {
 
     @Override
     protected void configure() {
-        bind(QueryEngine.class).to(WikipediaQueryEngine.class); //2nd class changed from FakeQueryEngine
+        bind(QueryEngine.class).to(WikipediaQueryEngine.class);
         bind(Duration.class).toInstance(Duration.ofSeconds(2));
     }
 }
